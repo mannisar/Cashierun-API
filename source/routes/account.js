@@ -1,7 +1,8 @@
 const express = require('express')
 const Route = express.Router()
 
-const { middleware } = require("../auth");
+// check token.
+// const { middleware } = require("../auth"); 
 
 const {
     createAccount,
@@ -16,11 +17,11 @@ const { uploadImages } = require('../controllers/upload');
 
 Route
     .post('/', uploadImages, createAccount)
-    .get('/', middleware, readAccount)
-    .patch('/:id', middleware, uploadImages, updateAccount)
-    .delete('/:id', middleware, deleteAccount)
-    .get('/detail/:id', middleware, readAccount)
+    .get('/', readAccount)
+    .patch('/:id', uploadImages, updateAccount)
+    .delete('/:id', deleteAccount)
+    .get('/detail/:id', readAccount)
     .post('/login', login)
-    .patch('/password/:id', middleware, changePassword)
+    .patch('/password/:id', changePassword)
 
 module.exports = Route

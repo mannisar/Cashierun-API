@@ -1,7 +1,8 @@
 const express = require('express')
 const Route = express.Router()
 
-const { middleware } = require("../auth");
+// check token.
+// const { middleware } = require("../auth"); 
 
 const {
     createRole,
@@ -11,9 +12,9 @@ const {
 } = require('../controllers/role')
 
 Route
-    .post('/', middleware, createRole)
-    .get('/', middleware, readRole)
-    .patch('/:id', middleware, updateRole)
-    .delete('/:id', middleware, deleteRole)
+    .post('/', createRole)
+    .get('/', readRole)
+    .patch('/:id', updateRole)
+    .delete('/:id', deleteRole)
 
 module.exports = Route

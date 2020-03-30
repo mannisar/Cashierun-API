@@ -1,7 +1,8 @@
 const express = require('express')
 const Route = express.Router()
 
-const { middleware } = require("../auth");
+// check token.
+// const { middleware } = require("../auth"); 
 
 const {
     tablePurchase,
@@ -11,10 +12,10 @@ const {
 } = require('../controllers/purchase')
 
 Route
-    .get('/history/table', middleware, tablePurchase)
-    .get('/history/table/:id', middleware, tablePurchase)
-    .get('/history/chart', middleware, chartPurchase)
-    .get('/history/card', middleware, cardPurchase)
+    .get('/history/table', tablePurchase)
+    .get('/history/table/:id', tablePurchase)
+    .get('/history/chart', chartPurchase)
+    .get('/history/card', cardPurchase)
     .post('/', purchase)
 
 module.exports = Route

@@ -1,15 +1,14 @@
-# CASHIERUN APP
-Point Of Sales API (BACKEND)
-
 # TABLE OF CONTENTS
-
 - [FEATURES](#FEATURES)
 - [SOFTWARE I USE](#software-i-use)
 - [REQUIREMENTS](#REQUIREMENTS)
 - [INSTALLATION](#INSTALLATION)
 
 ## FEATURES
+- <b>FULL RESPONSE</b>
+- <b>HANDLE ERROR</b>
 - <b>CRUD ACCOUNT</b> (WITH: DETAIL, LOGIN, REGISTER, AUTHENTICATION AND AUTHORIZATION)
+- <b>CRUD ROLE</b>
 - <b>CRUD PRODUCT</b> (WITH: DETAIL, SEARCH, PAGINATION, LIMIT, SORTBY AND ORDERBY)
 - <b>CRUD CATEGORY</b> (WITH: DETAIL)
 - <b>PURCHASE</b> (WITH: HISTORY TABLE + DETAIL, CHART, AND CART)
@@ -25,7 +24,6 @@ Point Of Sales API (BACKEND)
 - Postman
 
 ## REQUIREMENTS
-
 * [Node js](https://nodejs.org/en/)
 * [Express](http://expressjs.com/)
 * [nodemon](https://www.npmjs.com/package/nodemon)
