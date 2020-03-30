@@ -44,7 +44,7 @@
 <hr>
 
 ## DEV DEPENDENCIES
-* [standard](https://www.npmjs.com/package/standard)
+* [Standard](https://www.npmjs.com/package/standard)
 <hr>
 
 ## INSTALLATION
