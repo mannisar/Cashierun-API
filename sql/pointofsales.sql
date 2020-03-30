@@ -31,15 +31,15 @@ CREATE TABLE `account` (
   `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
   `date_updated` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 /*Data for the table `account` */
 
 insert  into `account`(`id`,`name`,`email`,`password`,`salt`,`id_role`,`image`,`date_added`,`date_updated`) values 
-(1,'Salman Isar','mannisar@cashierun.id','82633f24af19a80a103bba787394cf1006e4148815c1f3ecb9a244bda3c7240a232bc8875fbc83ca34146a91361934b7ff0eb7de53df9d06276f166acc928c73','cddca84ba0d75e75c5',1,'http://192.168.1.17:3004/upload/Ava-Man.png','2020-03-20 08:29:08','2020-03-20 08:34:40'),
-(2,'Dwi Cahyaningsih','dwi@cashierun.id','946ed2a11748e6ffe524dbbfdcc05d6c07bfaed6624e499facb9a0e9583d36f3c89472668254c26a63bfa8d29659e47e06456dff0b08c1fc1b6cb7cba0f12d46','5c42a8a3f0d0643061',1,'http://192.168.1.17:3004/upload/Ava-Woman.png','2020-03-20 08:30:16','2020-03-20 08:35:08'),
-(3,'admin','admin@cashierun.id','45271808ce3c520fc266131fa60cef1797d6b858231a631b0a950db9c59a410e329766b1b6f67a9aec32dabad137758ef5c0479dff56110ef2b20975e1715001','dee1639bdf56e09a98',2,'http://192.168.1.17:3004/upload/Ava-Admin.png','2020-03-20 08:31:13','2020-03-20 08:31:13'),
-(4,'cashier','cashier@cashierun.id','2b7b4f90f4daaf9b3a75ac677b504abb3347f01a99239062921fa9dceece115e9c3173ebc68f228b89e2edc9e813e5e5ea969513f8a06f9948a08f222e97c9c8','256eaabbe553015c5f',3,'http://192.168.1.17:3004/upload/Ava-Cashier.png','2020-03-20 08:31:47','2020-03-20 08:31:47');
+(1,'Salman Isar','mannisar@cashierun.id','82633f24af19a80a103bba787394cf1006e4148815c1f3ecb9a244bda3c7240a232bc8875fbc83ca34146a91361934b7ff0eb7de53df9d06276f166acc928c73','cddca84ba0d75e75c5',1,'http://localhost:3004/upload/Ava-Man.png','2020-03-20 08:29:08','2020-03-30 16:21:49'),
+(2,'Dwi Cahyaningsih','dwi@cashierun.id','946ed2a11748e6ffe524dbbfdcc05d6c07bfaed6624e499facb9a0e9583d36f3c89472668254c26a63bfa8d29659e47e06456dff0b08c1fc1b6cb7cba0f12d46','5c42a8a3f0d0643061',1,'http://localhost:3004/upload/Ava-Woman.png','2020-03-20 08:30:16','2020-03-20 08:35:08'),
+(3,'admin','admin@cashierun.id','45271808ce3c520fc266131fa60cef1797d6b858231a631b0a950db9c59a410e329766b1b6f67a9aec32dabad137758ef5c0479dff56110ef2b20975e1715001','dee1639bdf56e09a98',2,'http://localhost:3004/upload/Ava-Admin.png','2020-03-20 08:31:13','2020-03-20 08:31:13'),
+(4,'cashier','cashier@cashierun.id','2b7b4f90f4daaf9b3a75ac677b504abb3347f01a99239062921fa9dceece115e9c3173ebc68f228b89e2edc9e813e5e5ea969513f8a06f9948a08f222e97c9c8','256eaabbe553015c5f',3,'http://localhost:3004/upload/Ava-Cashier.png','2020-03-20 08:31:47','2020-03-21 01:09:17');
 
 /*Table structure for table `category` */
 
@@ -66,8 +66,8 @@ CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(25) COLLATE latin1_general_ci NOT NULL,
   `description` text COLLATE latin1_general_ci NOT NULL,
-  `price` varchar(15) COLLATE latin1_general_ci NOT NULL,
-  `quantity` int(11) NOT NULL,
+  `price` int(25) NOT NULL,
+  `available` int(11) NOT NULL,
   `id_category` int(11) NOT NULL,
   `image` varchar(55) COLLATE latin1_general_ci NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -77,11 +77,12 @@ CREATE TABLE `product` (
 
 /*Data for the table `product` */
 
-insert  into `product`(`id`,`name`,`description`,`price`,`quantity`,`id_category`,`image`,`date_added`,`date_updated`) values 
-(1,'Red Valvet Latte','Janji Jiwa','23500',78,2,'http://192.168.1.17:3004/upload/Red-Valvet-Late.jpg','2020-03-20 09:24:13','2020-03-20 09:24:13'),
-(2,'Espresso','Kulo','13000',45,2,'http://192.168.1.17:3004/upload/Espresso.jpg','2020-03-20 09:24:53','2020-03-20 09:24:53'),
-(3,'Capuccino','Lain Hati','21000',20,2,'http://192.168.1.17:3004/upload/Capuccino.jpg','2020-03-20 09:25:26','2020-03-20 09:25:26'),
-(4,'Coffe Latte','Starbucks','54000',5,2,'http://192.168.1.17:3004/upload/Coffe-Late.jpg','2020-03-20 09:26:11','2020-03-20 09:26:11');
+insert  into `product`(`id`,`name`,`description`,`price`,`available`,`id_category`,`image`,`date_added`,`date_updated`) values 
+(1,'Red Valvet Latte','Janji Jiwa',23500,53,2,'http://localhost:3004/upload/Red-Valvet-Late.jpg','2020-03-20 09:24:13','2020-03-28 17:27:14'),
+(2,'Espresso','Kulo',13000,32,2,'http://localhost:3004/upload/Espresso.jpg','2020-03-20 09:24:53','2020-03-24 13:31:46'),
+(3,'Capuccino','Lain Hati',21000,89,2,'http://localhost:3004/upload/Capuccino.jpg','2020-03-20 09:25:26','2020-03-28 20:25:36'),
+(4,'Coffe Latte','Starbucks',54000,41,2,'http://localhost:3004/upload/Coffe-Late.jpg','2020-03-20 09:26:11','2020-03-28 20:25:41'),
+(5,'Chicken Katsu','Pochajjang',99001,51,1,'http://localhost:3004/upload/Chicken-Katsu.jpg','2020-03-21 00:23:54','2020-03-21 00:25:43');
 
 /*Table structure for table `purchase` */
 
@@ -98,7 +99,7 @@ CREATE TABLE `purchase` (
 /*Data for the table `purchase` */
 
 insert  into `purchase`(`id`,`id_account`,`total`,`date`) values 
-('MKKS291495510',1,175000,'2020-03-20 16:17:16');
+('8d29cbbf-6c5c-4b8d-a33e-1f0646499bc8',3,36500,'2020-03-30 16:29:32');
 
 /*Table structure for table `purchase_detail` */
 
@@ -108,7 +109,7 @@ CREATE TABLE `purchase_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_purchase` varchar(55) COLLATE latin1_general_ci NOT NULL,
   `id_product` int(11) NOT NULL,
-  `price` int(15) NOT NULL,
+  `price` int(25) NOT NULL,
   `quantity` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
@@ -116,8 +117,8 @@ CREATE TABLE `purchase_detail` (
 /*Data for the table `purchase_detail` */
 
 insert  into `purchase_detail`(`id`,`id_purchase`,`id_product`,`price`,`quantity`) values 
-(1,'MKKS291495510',1,5000,2),
-(2,'MKKS291495510',2,7000,5);
+(1,'8d29cbbf-6c5c-4b8d-a33e-1f0646499bc8',1,23500,1),
+(2,'8d29cbbf-6c5c-4b8d-a33e-1f0646499bc8',2,13000,1);
 
 /*Table structure for table `role` */
 
