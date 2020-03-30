@@ -1,6 +1,8 @@
 const express = require('express')
 const Route = express.Router()
 
+const { middleware } = require("../auth");
+
 const {
     createAccount,
     readAccount,
@@ -14,11 +16,11 @@ const { uploadImages } = require('../controllers/upload');
 
 Route
     .post('/', uploadImages, createAccount)
-    .get('/', readAccount)
-    .patch('/:id', uploadImages, updateAccount)
-    .delete('/:id', deleteAccount)
-    .get('/detail/:id', readAccount)
+    .get('/', middleware, readAccount)
+    .patch('/:id', middleware, uploadImages, updateAccount)
+    .delete('/:id', middleware, deleteAccount)
+    .get('/detail/:id', middleware, readAccount)
     .post('/login', login)
-    .patch('/password/:id', changePassword)
+    .patch('/password/:id', middleware, changePassword)
 
 module.exports = Route

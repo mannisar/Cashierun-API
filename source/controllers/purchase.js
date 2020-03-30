@@ -1,5 +1,6 @@
 const purchaseModel = require('../models/purchase')
 const funcHelpers = require('../helpers')
+const uuidv4 = require('uuid/v4')
 
 module.exports = {
     tablePurchase: async (request, response) => {
@@ -17,10 +18,7 @@ module.exports = {
     },
     chartPurchase: async (request, response) => {
         try {
-            const orderBy = request.query.orderBy
-            orderBy = typeof orderBy !== 'undefined' ? orderBy : "week"
-
-            const result = await purchaseModel.chartPurchase(orderBy)
+            const result = await purchaseModel.chartPurchase()
             funcHelpers.response(response, 200, result)
         } catch (error) {
             console.log(error)
@@ -41,16 +39,16 @@ module.exports = {
             const purchase = request.body
             var loop = 0
 
+            const id = uuidv4()
             await purchase.product.map(event => {
                 const data = {
-                    id: purchase.id,
                     id_account: purchase.id_account,
                     total: purchase.total,
                     id_product: event.id,
                     price: event.price,
                     quantity: event.quantity
                 }
-                purchaseModel.purchase(data, loop)
+                purchaseModel.purchase(id, data, loop)
                 loop++
             })
 

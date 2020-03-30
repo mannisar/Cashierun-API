@@ -1,7 +1,7 @@
 const express = require('express')
 const Route = express.Router()
 
-const { authentication, authorization } = require("../helpers/auth");
+const { middleware } = require("../auth");
 
 const {
     tablePurchase,
@@ -11,10 +11,10 @@ const {
 } = require('../controllers/purchase')
 
 Route
-    .get('/history/table', tablePurchase)
-    .get('/history/table/detail/:id', tablePurchase)
-    .get('/history/chart', chartPurchase)
-    .get('/history/card', cardPurchase)
+    .get('/history/table', middleware, tablePurchase)
+    .get('/history/table/:id', middleware, tablePurchase)
+    .get('/history/chart', middleware, chartPurchase)
+    .get('/history/card', middleware, cardPurchase)
     .post('/', purchase)
 
 module.exports = Route

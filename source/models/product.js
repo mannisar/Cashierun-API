@@ -11,20 +11,20 @@ module.exports = {
     },
     createProduct: (data) => {
         const name = data.name
-        const quantity = data.quantity
+        const available = data.available
         const id_category = data.id_category
         return new Promise((resolve, reject) => {
             connection.query('ALTER TABLE product AUTO_INCREMENT = 0')
             connection.query("SELECT * FROM product WHERE product.name = ?", name, (error, result) => {
                 if (result.length > 0) {
-                    connection.query("UPDATE product SET quantity = ? WHERE product.id = ?", [result[0].quantity + parseInt(quantity), result[0].id])
+                    connection.query("UPDATE product SET available = ? WHERE product.id = ?", [result[0].available + parseInt(available), result[0].id])
                     connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
                         if (error) reject(new Error(error))
                         resolve(result)
                     })
                 } else {
                     connection.query("SELECT * FROM category WHERE category.id = ?", id_category, (error, result) => {
-                        if (data.id_category == result[0].id) {
+                        if (id_category == result[0].id) {
                             connection.query("INSERT INTO product SET ?", data)
                             connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
                                 if (error) reject(new Error(error))

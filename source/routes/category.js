@@ -1,7 +1,7 @@
 const express = require('express')
 const Route = express.Router()
 
-const { authentication, authorization } = require("../helpers/auth");
+const { middleware } = require("../auth");
 
 const {
     createCategory,
@@ -11,10 +11,10 @@ const {
 } = require('../controllers/category')
 
 Route
-    .post('/', createCategory)
-    .get('/', readCategory)
-    .patch('/:id', updateCategory)
-    .delete('/:id', deleteCategory)
-    .get('/:name', readCategory)
+    .post('/', middleware, createCategory)
+    .get('/', middleware, readCategory)
+    .patch('/:id', middleware, updateCategory)
+    .delete('/:id', middleware, deleteCategory)
+    .get('/:name', middleware, readCategory)
 
 module.exports = Route

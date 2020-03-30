@@ -10,7 +10,7 @@ module.exports = {
           name,
           description,
           price,
-          quantity,
+          available,
           id_category
         } = request.body;
 
@@ -18,7 +18,7 @@ module.exports = {
           name,
           description,
           price,
-          quantity,
+          available,
           id_category,
           date_added: new Date(),
           date_updated: new Date()
@@ -32,7 +32,7 @@ module.exports = {
         name,
         description,
         price,
-        quantity,
+        available,
         id_category
       } = request.body;
 
@@ -40,7 +40,7 @@ module.exports = {
         name,
         description,
         price,
-        quantity,
+        available,
         id_category,
         image: `${url}upload/${request.file.filename}`,
         date_added: new Date(),
@@ -59,7 +59,7 @@ module.exports = {
       const id = request.params.id
 
       const paginateId = request.query.paginateId || 1
-      const limit = request.query.limit || 10
+      const limit = request.query.limit || 25
 
       const product = request.query.product || ''
       const category = request.query.category || ''
@@ -94,7 +94,7 @@ module.exports = {
           name,
           description,
           price,
-          quantity,
+          available,
           id_category
         } = request.body
 
@@ -103,7 +103,7 @@ module.exports = {
           name,
           description,
           price,
-          quantity,
+          available,
           id_category,
           date_updated: new Date()
         };
@@ -117,7 +117,7 @@ module.exports = {
         name,
         description,
         price,
-        quantity,
+        available,
         id_category
       } = request.body
 
@@ -126,7 +126,7 @@ module.exports = {
         name,
         description,
         price,
-        quantity,
+        available,
         id_category,
         image: `${url}upload/${request.file.filename}`,
         date_updated: new Date()

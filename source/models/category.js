@@ -37,9 +37,9 @@ module.exports = {
             })
         })
     },
-    deleteCategory: (data) => {
+    deleteCategory: (id) => {
         return new Promise((resolve, reject) => {
-            connection.query('DELETE FROM category WHERE category.id = ?', data)
+            connection.query('DELETE FROM category WHERE category.id = ?', id)
             connection.query('SELECT * FROM category', (error, result) => {
                 if (error) reject(new Error(error))
                 connection.query('ALTER TABLE category DROP category.id')
