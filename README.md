@@ -24,7 +24,7 @@
 - SQLyog
 - Postman
 
-## REQUIREMENTS
+## DEPENDENCIES
 * [Node js](https://nodejs.org/en/)
 * [Express](http://expressjs.com/)
 * [nodemon](https://www.npmjs.com/package/nodemon)
@@ -38,19 +38,12 @@
 * [UUID](https://www.npmjs.com/package/uuid)
 <hr>
 
+## DEV DEPENDENCIES
+* [standard](https://www.npmjs.com/package/standard)
+
 ## INSTALLATION
 ```bash
-$ npm init
-$ npm install express
-$ npm install nodemon
-$ npm install body-parser
-$ npm install jsonwebtoken
-$ npm install mysql
-$ npm install morgan
-$ npm install dotenv
-$ npm install multer
-$ npm install cors
-$ npm install uuid
+$ npm install
 ```
 
 ### START THE PROJECT
