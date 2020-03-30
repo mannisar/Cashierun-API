@@ -8,11 +8,11 @@ const categoryRouter = require('./routes/category')
 const purchaseRouter = require('./routes/purchase')
 
 Route
-    .use('/account', accountRouter)
-    .use('/role', roleRouter)
-    .use('/product', productRouter)
-    .use('/category', categoryRouter)
-    .use('/purchase', purchaseRouter)
-    .use('/upload', express.static('./upload'))
+  .use('/account', accountRouter)
+  .use('/role', roleRouter)
+  .use('/product', productRouter)
+  .use('/category', categoryRouter)
+  .use('/purchase', purchaseRouter)
+  .use('/upload', express.static('./upload'))
 
 module.exports = Route

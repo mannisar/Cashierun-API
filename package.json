@@ -22,5 +22,8 @@
     "mysql": "^2.18.1",
     "nodemon": "^2.0.2",
     "uuid": "^3.4.0"
+  },
+  "devDependencies": {
+    "standard": "^14.3.3"
   }
 }

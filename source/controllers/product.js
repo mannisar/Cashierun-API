@@ -1,6 +1,6 @@
-const productModel = require("../models/product");
-const funcHelpers = require("../helpers");
-const { url } = require("../configs/mysql");
+const productModel = require('../models/product')
+const funcHelpers = require('../helpers')
+const { url } = require('../configs/mysql')
 
 module.exports = {
   createProduct: async (request, response) => {
@@ -10,19 +10,18 @@ module.exports = {
           name,
           description,
           price,
-          available,
-          id_category
-        } = request.body;
+          available
+        } = request.body
 
         const data = {
           name,
           description,
           price,
           available,
-          id_category,
+          id_category: request.body.id_category || 1,
           date_added: new Date(),
           date_updated: new Date()
-        };
+        }
 
         const result = await productModel.createProduct(data)
         return funcHelpers.response(response, 200, result)
@@ -32,26 +31,25 @@ module.exports = {
         name,
         description,
         price,
-        available,
-        id_category
-      } = request.body;
+        available
+      } = request.body
 
       const data = {
         name,
         description,
         price,
         available,
-        id_category,
+        id_category: request.body.id_category || 1,
         image: `${url}upload/${request.file.filename}`,
         date_added: new Date(),
         date_updated: new Date()
-      };
+      }
 
       const result = await productModel.createProduct(data)
       funcHelpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
-      funcHelpers.responseError(response, 404, error.message);
+      funcHelpers.responseError(response, 404, error.message)
     }
   },
   readProduct: async (request, response) => {
@@ -72,7 +70,7 @@ module.exports = {
         paginateId,
         limit,
         sortBy,
-        orderBy,
+        orderBy
       }
 
       const result = await productModel.readProduct(product, category, data)
@@ -94,8 +92,7 @@ module.exports = {
           name,
           description,
           price,
-          available,
-          id_category
+          available
         } = request.body
 
         const data = {
@@ -104,9 +101,9 @@ module.exports = {
           description,
           price,
           available,
-          id_category,
+          id_category: request.body.id_category || 1,
           date_updated: new Date()
-        };
+        }
 
         const result = await productModel.updateProduct(data)
         return funcHelpers.response(response, 200, result)
@@ -117,8 +114,7 @@ module.exports = {
         name,
         description,
         price,
-        available,
-        id_category
+        available
       } = request.body
 
       const data = {
@@ -127,16 +123,16 @@ module.exports = {
         description,
         price,
         available,
-        id_category,
+        id_category: request.body.id_category || 1,
         image: `${url}upload/${request.file.filename}`,
         date_updated: new Date()
-      };
+      }
 
       const result = await productModel.updateProduct(data)
       funcHelpers.response(response, 200, result)
     } catch (error) {
-      console.log(error);
-      funcHelpers.responseError(response, 404, "Update Product Failed!");
+      console.log(error)
+      funcHelpers.responseError(response, 404, 'Update Product Failed!')
     }
   },
   deleteProduct: async (request, response) => {
@@ -146,7 +142,7 @@ module.exports = {
       funcHelpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
-      funcHelpers.responseError(response, 404, "Delete Product Failed!")
+      funcHelpers.responseError(response, 404, 'Delete Product Failed!')
     }
   }
-};
+}
