@@ -1,8 +1,10 @@
 # TABLE OF CONTENTS
 - [FEATURES](#FEATURES)
 - [SOFTWARE I USE](#software-i-use)
-- [REQUIREMENTS](#REQUIREMENTS)
+- [DEPENDENCIES](#DEPENDENCIES)
+- [DEV DEPENDENCIES](#dev-dependencies)
 - [INSTALLATION](#INSTALLATION)
+<hr>
 
 ## FEATURES
 - <b>CRUD ACCOUNT</b> (WITH: DETAIL, LOGIN, REGISTER, AUTHENTICATION AND AUTHORIZATION)
@@ -10,6 +12,7 @@
 - <b>CRUD PRODUCT</b> (WITH: DETAIL, SEARCH, PAGINATION, LIMIT, SORTBY AND ORDERBY)
 - <b>CRUD CATEGORY</b> (WITH: DETAIL)
 - <b>PURCHASE</b> (WITH: HISTORY TABLE + DETAIL, CHART, AND CARD)
+<hr>
 
 ## INCLUDES
 - <b>CLEAN CODE/STANDARD JAVASCRIPT</b>
@@ -17,12 +20,14 @@
 - <b>HANDLE ERROR</b>
 - <b>CORS</b>
 - <b>IMAGE UPLOAD</b>
+<hr>
 
 ## SOFTWARE I USE
 - Visual Studio Code
 - XAMPP
 - SQLyog
 - Postman
+<hr>
 
 ## DEPENDENCIES
 * [Node js](https://nodejs.org/en/)
@@ -40,6 +45,7 @@
 
 ## DEV DEPENDENCIES
 * [standard](https://www.npmjs.com/package/standard)
+<hr>
 
 ## INSTALLATION
 ```bash
