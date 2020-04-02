@@ -1,8 +1,10 @@
 # TABLE OF CONTENTS
 - [FEATURES](#FEATURES)
 - [SOFTWARE I USE](#software-i-use)
-- [REQUIREMENTS](#REQUIREMENTS)
+- [DEPENDENCIES](#DEPENDENCIES)
+- [DEV DEPENDENCIES](#dev-dependencies)
 - [INSTALLATION](#INSTALLATION)
+<hr>
 
 ## FEATURES
 - <b>CRUD ACCOUNT</b> (WITH: DETAIL, LOGIN, REGISTER, AUTHENTICATION AND AUTHORIZATION)
@@ -10,6 +12,7 @@
 - <b>CRUD PRODUCT</b> (WITH: DETAIL, SEARCH, PAGINATION, LIMIT, SORTBY AND ORDERBY)
 - <b>CRUD CATEGORY</b> (WITH: DETAIL)
 - <b>PURCHASE</b> (WITH: HISTORY TABLE + DETAIL, CHART, AND CARD)
+<hr>
 
 ## INCLUDES
 - <b>CLEAN CODE/STANDARD JAVASCRIPT</b>
@@ -17,14 +20,16 @@
 - <b>HANDLE ERROR</b>
 - <b>CORS</b>
 - <b>IMAGE UPLOAD</b>
+<hr>
 
 ## SOFTWARE I USE
 - Visual Studio Code
 - XAMPP
 - SQLyog
 - Postman
+<hr>
 
-## REQUIREMENTS
+## DEPENDENCIES
 * [Node js](https://nodejs.org/en/)
 * [Express](http://expressjs.com/)
 * [nodemon](https://www.npmjs.com/package/nodemon)
@@ -38,19 +43,13 @@
 * [UUID](https://www.npmjs.com/package/uuid)
 <hr>
 
+## DEV DEPENDENCIES
+* [Standard](https://www.npmjs.com/package/standard)
+<hr>
+
 ## INSTALLATION
 ```bash
-$ npm init
-$ npm install express
-$ npm install nodemon
-$ npm install body-parser
-$ npm install jsonwebtoken
-$ npm install mysql
-$ npm install morgan
-$ npm install dotenv
-$ npm install multer
-$ npm install cors
-$ npm install uuid
+$ npm install
 ```
 
 ### START THE PROJECT
