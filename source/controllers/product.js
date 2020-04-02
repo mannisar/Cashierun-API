@@ -75,7 +75,7 @@ module.exports = {
 
       const result = await productModel.readProduct(product, category, data)
       const totalData = await productModel.countProduct(product, category)
-      const amount = Math.ceil(totalData / limit)
+      const amount = Math.ceil(totalData[0].totalData / limit)
       const paginateTab = { amount }
 
       funcHelpers.responsePagination(response, 200, result, parseInt(paginateId), paginateTab)
