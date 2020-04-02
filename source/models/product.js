@@ -5,7 +5,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       connection.query('SELECT COUNT(*) AS totalData, category.name AS category FROM product LEFT JOIN category ON product.id_category = category.id WHERE product.name LIKE "%' + product + '%" AND category.name LIKE "%' + category + '%"', (error, result) => {
         if (error) reject(new Error(error))
-        resolve(result[0].totalData)
+        resolve(result.totalData)
       })
     })
   },
