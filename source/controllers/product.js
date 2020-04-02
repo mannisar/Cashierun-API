@@ -56,29 +56,19 @@ module.exports = {
     try {
       const id = request.params.id
 
-      const paginateId = request.query.paginateId || 1
-      const limit = request.query.limit || 25
-
       const product = request.query.product || ''
       const category = request.query.category || ''
 
       const sortBy = request.query.sortBy || 'id'
-      const orderBy = request.query.orderBy || 'ASC'
 
-      const data = {
-        id,
-        paginateId,
-        limit,
-        sortBy,
-        orderBy
-      }
+      const paginateId = request.query.paginateId || 1
+      const limit = request.query.limit || 9999
 
-      const result = await productModel.readProduct(product, category, data)
-      const totalData = await productModel.countProduct(product, category)
-      const amount = Math.ceil(totalData / limit)
-      const paginateTab = { amount }
+      const result = await productModel.readProduct(id, product, category, sortBy, paginateId, limit)
+      const totalData = await productModel.readProduct(id, product, category, 'id', 1, 1000)
+      const totalPage = Math.ceil(totalData.length / limit)
 
-      funcHelpers.responsePagination(response, 200, result, parseInt(paginateId), paginateTab)
+      funcHelpers.response(response, 200, result, totalPage)
     } catch (error) {
       console.log(error)
       funcHelpers.customErrorResponse(response, 404, 'Read Product Failed!')

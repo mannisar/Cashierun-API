@@ -1,14 +1,6 @@
 const connection = require('../configs/database')
 
 module.exports = {
-  countProduct: (product, category) => {
-    return new Promise((resolve, reject) => {
-      connection.query('SELECT COUNT(*) AS totalData, category.name AS category FROM product LEFT JOIN category ON product.id_category = category.id WHERE product.name LIKE "%' + product + '%" AND category.name LIKE "%' + category + '%"', (error, result) => {
-        if (error) reject(new Error(error))
-        resolve(result[0].totalData)
-      })
-    })
-  },
   createProduct: (data) => {
     const name = data.name
     const available = parseInt(data.available)
@@ -40,26 +32,16 @@ module.exports = {
       })
     })
   },
-  readProduct: (product, category, data) => {
-    const id = data.id
-    const paginateId = data.paginateId
-    const limit = data.limit
-    const sortBy = data.sortBy
-    const orderBy = data.orderBy
+  readProduct: (id, product, category, sortBy, paginateId, limit) => {
     return new Promise((resolve, reject) => {
       if (id != null) {
         connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category WHERE product.id = ?', id, (error, result) => {
           if (error) reject(new Error(error))
           resolve(result)
         })
-      } else if (product != null || category != null || paginateId != null || limit != null || sortBy != null || orderBy != null) {
+      } else if (product != null || category != null || sortBy != null || paginateId != null || limit != null) {
         const paginateStart = ((paginateId * limit) - limit)
-        connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category WHERE product.name LIKE "%' + product + '%" AND category.name LIKE "%' + category + '%" ORDER BY ' + sortBy + ' ' + orderBy + ' LIMIT ' + paginateStart + ',' + limit, (error, result) => {
-          if (error) reject(new Error(error))
-          resolve(result)
-        })
-      } else {
-        connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
+        connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category WHERE product.name LIKE "%' + product + '%" AND category.name LIKE "%' + category + '%" ORDER BY ' + sortBy + ' ASC LIMIT ' + paginateStart + ',' + limit, (error, result) => {
           if (error) reject(new Error(error))
           resolve(result)
         })
