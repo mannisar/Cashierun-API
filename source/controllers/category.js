@@ -13,7 +13,7 @@ module.exports = {
       }
 
       const result = await categoryModel.createCategory(data)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.responseError(response, 404, 'Create Category Failed!')
@@ -28,7 +28,7 @@ module.exports = {
       }
 
       const result = await categoryModel.readCategory(data)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.customErrorResponse(response, 404, 'Read Category Failed!')
@@ -47,7 +47,7 @@ module.exports = {
       }
 
       const result = await categoryModel.updateCategory(data)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.responseError(response, 404, 'Update Category Failed!')
@@ -57,7 +57,7 @@ module.exports = {
     try {
       const id = request.params.id
       const result = await categoryModel.deleteCategory(id)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.responseError(response, 404, 'Delete Category Failed!')

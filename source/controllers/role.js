@@ -13,7 +13,7 @@ module.exports = {
       }
 
       const result = await roleModel.createRole(data)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.responseError(response, 404, 'Create Role Failed!')
@@ -22,7 +22,7 @@ module.exports = {
   readRole: async (request, response) => {
     try {
       const result = await roleModel.readRole()
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.customErrorResponse(response, 404, 'Read Role Failed!')
@@ -41,7 +41,7 @@ module.exports = {
       }
 
       const result = await roleModel.updateRole(data)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.responseError(response, 404, 'Update Role Failed!')
@@ -51,7 +51,7 @@ module.exports = {
     try {
       const id = request.params.id
       const result = await roleModel.deleteRole(id)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.responseError(response, 404, 'Delete Role Failed!')

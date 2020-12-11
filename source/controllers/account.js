@@ -6,7 +6,7 @@ const { JWT_KEY, url } = require('../configs/mysql')
 module.exports = {
   createAccount: async (request, response) => {
     const checkEmail = await accountModel.checkEmail(request.body.email)
-    const dataAccount = checkEmail[0]
+    const dataAccount = checkEmail.rows[0]
 
     const salt = funcHelpers.generateSalt(18)
     const hashPassword = funcHelpers.setPassword(request.body.password, salt)
@@ -24,12 +24,13 @@ module.exports = {
           salt: hashPassword.salt,
           password: hashPassword.passwordHash,
           id_role: request.body.id_role || 4,
+          image: null,
           date_added: new Date(),
           date_updated: new Date()
         }
 
         const result = await accountModel.createAccount(data)
-        return funcHelpers.response(response, 200, result)
+        return funcHelpers.response(response, 200, result.rows)
       }
 
       const {
@@ -49,7 +50,7 @@ module.exports = {
       }
 
       const result = await accountModel.createAccount(data)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } else {
       return funcHelpers.responseErrorAccount(response, 404, 'Your Email is Already Registered!')
     }
@@ -61,7 +62,7 @@ module.exports = {
         id
       }
       const result = await accountModel.readAccount(data)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.responseError(response, 404, 'Read Account Failed!')
@@ -86,7 +87,7 @@ module.exports = {
         }
 
         const result = await accountModel.updateAccount(data)
-        return funcHelpers.response(response, 200, result)
+        return funcHelpers.response(response, 200, result.rows)
       }
 
       const id = request.params.id
@@ -106,7 +107,7 @@ module.exports = {
       }
 
       const result = await accountModel.updateAccount(data)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.cumstomErrorResponse(response, 404, 'Update Account Failed!')
@@ -116,7 +117,7 @@ module.exports = {
     try {
       const id = request.params.id
       const result = await accountModel.deleteAccount(id)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.cumstomErrorResponse(response, 404, 'Delete Account Failed!')
@@ -124,7 +125,7 @@ module.exports = {
   },
   login: async (request, response) => {
     const checkEmail = await accountModel.checkEmail(request.body.email)
-    const dataAccount = checkEmail[0]
+    const dataAccount = checkEmail.rows[0]
 
     if (dataAccount !== undefined) {
       const data = {

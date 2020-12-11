@@ -24,7 +24,7 @@ module.exports = {
         }
 
         const result = await productModel.createProduct(data)
-        return funcHelpers.response(response, 200, result)
+        return funcHelpers.response(response, 200, result.rows)
       }
 
       const {
@@ -46,7 +46,7 @@ module.exports = {
       }
 
       const result = await productModel.createProduct(data)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.responseError(response, 404, error.message)
@@ -64,11 +64,11 @@ module.exports = {
       const paginateId = request.query.paginateId || 1
       const limit = request.query.limit || 9999
 
-      const result = await productModel.readProduct(id, product, category, sortBy, paginateId, limit)
-      const totalData = await productModel.readProduct(id, product, category, 'id', 1, 1000)
-      const totalPage = Math.ceil(totalData.length / limit)
+      const result = await productModel.readProduct(id, product, category, sortBy, limit, paginateId)
+      const totalData = await productModel.readProduct(id, product, category, 'id', 1000, 1)
+      const totalPage = Math.ceil(totalData.rows.length / limit)
 
-      funcHelpers.response(response, 200, result, totalPage)
+      funcHelpers.response(response, 200, result.rows, totalPage)
     } catch (error) {
       console.log(error)
       funcHelpers.customErrorResponse(response, 404, 'Read Product Failed!')
@@ -96,7 +96,7 @@ module.exports = {
         }
 
         const result = await productModel.updateProduct(data)
-        return funcHelpers.response(response, 200, result)
+        return funcHelpers.response(response, 200, result.rows)
       }
 
       const id = request.params.id
@@ -119,7 +119,7 @@ module.exports = {
       }
 
       const result = await productModel.updateProduct(data)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.responseError(response, 404, 'Update Product Failed!')
@@ -129,7 +129,7 @@ module.exports = {
     try {
       const id = request.params.id
       const result = await productModel.deleteProduct(id)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.responseError(response, 404, 'Delete Product Failed!')

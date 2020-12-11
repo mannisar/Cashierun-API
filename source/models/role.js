@@ -3,8 +3,7 @@ const connection = require('../configs/database')
 module.exports = {
   createRole: (data) => {
     return new Promise((resolve, reject) => {
-      connection.query('ALTER TABLE role AUTO_INCREMENT = 0')
-      connection.query('INSERT INTO role SET ?', data)
+      connection.query(`INSERT INTO role (name) VALUES ('${data.name}')`)
       connection.query('SELECT * FROM role', (error, result) => {
         if (error) reject(new Error(error))
         resolve(result)
@@ -21,8 +20,9 @@ module.exports = {
   },
   updateRole: (data) => {
     const id = data.id
+    const name = data.name
     return new Promise((resolve, reject) => {
-      connection.query('UPDATE role SET ? WHERE role.id = ?', [data, id])
+      connection.query(`UPDATE role SET name = '${name}' WHERE role.id = $1`, [id])
       connection.query('SELECT * FROM role', (error, result) => {
         if (error) reject(new Error(error))
         resolve(result)
@@ -31,11 +31,11 @@ module.exports = {
   },
   deleteRole: (id) => {
     return new Promise((resolve, reject) => {
-      connection.query('DELETE FROM role WHERE role.id = ?', id)
+      connection.query('DELETE FROM role WHERE role.id = $1', [id])
       connection.query('SELECT * FROM role', (error, result) => {
         if (error) reject(new Error(error))
-        connection.query('ALTER TABLE role DROP role.id')
-        connection.query('ALTER TABLE role ADD role.id INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST')
+        connection.query('ALTER SEQUENCE role_id_seq RESTART')
+        connection.query('UPDATE role SET id = DEFAULT')
         resolve(result)
       })
     })

@@ -5,7 +5,7 @@ module.exports = {
     const id = data.id
     return new Promise((resolve, reject) => {
       if (id != null) {
-        connection.query('SELECT purchase_detail.*, product.name AS product FROM purchase_detail INNER JOIN product ON product.id = purchase_detail.id_product WHERE purchase_detail.id_purchase = ?', id, (error, result) => {
+        connection.query('SELECT purchase_detail.*, product.name AS product FROM purchase_detail INNER JOIN product ON product.id = purchase_detail.id_product WHERE purchase_detail.id_purchase = $1', [id], (error, result) => {
           if (error) reject(new Error(error))
           resolve(result)
         })
@@ -40,15 +40,14 @@ module.exports = {
     const price = data.price
     const quantity = data.quantity
     return new Promise((resolve, reject) => {
-      connection.query('SELECT * FROM product WHERE product.id = ?', productId, (error, result) => {
+      connection.query('SELECT * FROM product WHERE product.id = $1', [productId], (error, result) => {
         if (error) reject(new Error(error))
-        if (result.length > 0) {
-          const checkId = result[0].id
-          const checkAvailable = result[0].available - quantity
+        if (result.rows.length > 0) {
+          const checkId = result.rows[0].id
+          const checkAvailable = result.rows[0].available - quantity
           if (checkAvailable >= 0) {
-            connection.query('UPDATE product SET available = ? WHERE product.id = ?', [checkAvailable, checkId])
+            connection.query(`UPDATE product SET available = '${checkAvailable}' WHERE product.id = $1`, [checkId])
             if (loop === 0) { connection.query("INSERT INTO purchase (id, id_account, total) VALUES ('" + id + "', '" + accountId + "', '" + total + "')") }
-            connection.query('ALTER TABLE purchase_detail AUTO_INCREMENT = 0')
             connection.query("INSERT INTO purchase_detail (id_purchase, id_product, price, quantity) VALUES ('" + id + "', '" + productId + "', '" + price + "', '" + quantity + "')", (error, result) => {
               if (error) reject(new Error(error))
               resolve(result)

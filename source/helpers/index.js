@@ -18,12 +18,10 @@ module.exports = {
     const result = {}
     const page = []
 
-    if (pagination) {
-      for (var i = 1; i <= pagination; i++) {
-        page[i - 1] = i
-      }
-      result.totalPage = page
+    for (var i = 1; i <= pagination; i++) {
+      page[i - 1] = i
     }
+    result.totalPage = page
 
     result.status = status || 200
     result.result = data

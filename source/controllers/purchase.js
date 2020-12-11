@@ -10,7 +10,7 @@ module.exports = {
         id
       }
       const result = await purchaseModel.tablePurchase(data)
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.responseError(response, 404, 'Table Purchase Failed!')
@@ -19,7 +19,7 @@ module.exports = {
   chartPurchase: async (request, response) => {
     try {
       const result = await purchaseModel.chartPurchase()
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.responseError(response, 404, 'Chart Purchase Failed!')
@@ -28,7 +28,7 @@ module.exports = {
   cardPurchase: async (request, response) => {
     try {
       const result = await purchaseModel.cardPurchase()
-      funcHelpers.response(response, 200, result)
+      funcHelpers.response(response, 200, result.rows)
     } catch (error) {
       console.log(error)
       funcHelpers.responseError(response, 404, 'Card Purchase Failed!')
