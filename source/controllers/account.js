@@ -1,7 +1,7 @@
 const accountModel = require('../models/account')
 const funcHelpers = require('../helpers')
 const JWT = require('jsonwebtoken')
-const { JWT_KEY, url } = require('../configs/mysql')
+const { JWT_KEY, url } = require('../configs/env')
 
 module.exports = {
   createAccount: async (request, response) => {

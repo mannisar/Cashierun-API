@@ -5,7 +5,7 @@ const time = require('morgan')
 const Body = require('body-parser')
 
 const callRoute = require('./source/index')
-const { port } = require('./source/configs/mysql')
+const { port } = require('./source/configs/env')
 
 app.use(
   Body.urlencoded({

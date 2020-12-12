@@ -1,6 +1,6 @@
 const productModel = require('../models/product')
 const funcHelpers = require('../helpers')
-const { url } = require('../configs/mysql')
+const { url } = require('../configs/env')
 
 module.exports = {
   createProduct: async (request, response) => {

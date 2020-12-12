@@ -14,7 +14,8 @@ CREATE TABLE account
     date_added timestamp without time zone NOT NULL DEFAULT now(),
     date_updated timestamp without time zone NOT NULL DEFAULT now(),
     CONSTRAINT account_pkey PRIMARY KEY (id)
-)
+);
+
 
 TABLESPACE pg_default;
 
