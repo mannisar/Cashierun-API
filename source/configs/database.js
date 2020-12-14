@@ -11,7 +11,7 @@ const connection = new Pool({
 
 connection.connect((err) => {
   if (err) {
-    console.log(`DATABASE CONNECTION FAILED!!`, err)
+    console.log(`DATABASE CONNECTION FAILED!!`)
   } else {
     console.log(`DATABASE CONNECTION SUCCESSFUL!!`)
   }
