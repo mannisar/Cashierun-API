@@ -12,25 +12,31 @@ module.exports = {
       connection.query('SELECT * FROM product WHERE product.name = $1', [name], (error, result) => {
         if (result.length > 0) {
           connection.query('UPDATE product SET available = $1 WHERE product.id = $2', [result.rows[0].available + available, result.rows[0].id])
-          connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
-            if (error) reject(new Error(error))
-            resolve(result)
-          })
+          setTimeout(() => {
+            connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
+              if (error) reject(new Error(error))
+              resolve(result)
+            })
+          }, 1000)
         } else {
           connection.query('SELECT * FROM category WHERE category.id = $1', [categoryId], (error, result) => {
             if (categoryId === result.rows[0].id) {
               if (image === undefined) {
                 connection.query(`INSERT INTO product (name, description, price, available, id_category) VALUES('${name}', '${description}', '${price}', '${available}', '${categoryId}')`)
-                connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
-                  if (error) reject(new Error(error))
-                  resolve(result)
-                })
+                setTimeout(() => {
+                  connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
+                    if (error) reject(new Error(error))
+                    resolve(result)
+                  })
+                }, 1000)
               } else {
                 connection.query(`INSERT INTO product (name, description, price, available, id_category, image) VALUES('${name}', '${description}', '${price}', '${available}', '${categoryId}', '${image}')`)
-                connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
-                  if (error) reject(new Error(error))
-                  resolve(result)
-                })
+                setTimeout(() => {
+                  connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
+                    if (error) reject(new Error(error))
+                    resolve(result)
+                  })
+                }, 1000)
               }
             } else {
               reject(new Error(error))
@@ -68,28 +74,34 @@ module.exports = {
     return new Promise((resolve, reject) => {
       if (image === undefined) {
         connection.query(`UPDATE product SET name = '${name}', description = '${description}', price = '${price}', available = '${available}', id_category = '${categoryId}' WHERE product.id = $1`, [id])
-        connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
-          if (error) reject(new Error(error))
-          resolve(result)
-        })
+        setTimeout(() => {
+          connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
+            if (error) reject(new Error(error))
+            resolve(result)
+          })
+        }, 1000)
       } else {
         connection.query(`UPDATE product SET name = '${name}', description = '${description}', price = '${price}', available = '${available}', id_category = '${categoryId}', image = '${image}' WHERE product.id = $1`, [id])
-        connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
-          if (error) reject(new Error(error))
-          resolve(result)
-        })
+        setTimeout(() => {
+          connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
+            if (error) reject(new Error(error))
+            resolve(result)
+          })
+        }, 1000)
       }
     })
   },
   deleteProduct: (id) => {
     return new Promise((resolve, reject) => {
       connection.query('DELETE FROM product WHERE product.id = $1', [id])
-      connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
-        if (error) reject(new Error(error))
-        connection.query('ALTER SEQUENCE product_id_seq RESTART')
-        connection.query('UPDATE product SET id = DEFAULT')
-        resolve(result)
-      })
+      setTimeout(() => {
+        connection.query('SELECT product.*, category.name AS category FROM product INNER JOIN category ON category.id = product.id_category', (error, result) => {
+          if (error) reject(new Error(error))
+          connection.query('ALTER SEQUENCE product_id_seq RESTART')
+          connection.query('UPDATE product SET id = DEFAULT')
+          resolve(result)
+        })
+      }, 1000)
     })
   }
 }

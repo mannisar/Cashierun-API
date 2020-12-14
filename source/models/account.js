@@ -11,16 +11,20 @@ module.exports = {
     return new Promise((resolve, reject) => {
       if (image === undefined) {
         connection.query(`INSERT INTO account (name, email, salt, password, id_role) VALUES('${name}', '${email}', '${salt}', '${password}', '${id_role}')`)
-        connection.query('SELECT account.*, role.name AS role FROM account INNER JOIN role ON role.id = account.id_role', (error, result) => {
-          if (error) reject(new Error(error))
-          return resolve(result)
-        })
+        setTimeout(() => {
+          connection.query('SELECT account.*, role.name AS role FROM account INNER JOIN role ON role.id = account.id_role', (error, result) => {
+            if (error) reject(new Error(error))
+            return resolve(result)
+          })
+        }, 1000)
       } else {
         connection.query(`INSERT INTO account (name, email, salt, password, id_role, image) VALUES('${name}', '${email}', '${salt}', '${password}', '${id_role}', '${image}')`)
-        connection.query('SELECT account.*, role.name AS role FROM account INNER JOIN role ON role.id = account.id_role', (error, result) => {
-          if (error) reject(new Error(error))
-          resolve(result)
-        })
+        setTimeout(() => {
+          connection.query('SELECT account.*, role.name AS role FROM account INNER JOIN role ON role.id = account.id_role', (error, result) => {
+            if (error) reject(new Error(error))
+            return resolve(result)
+          })
+        }, 1000)
       }
     })
   },
@@ -49,28 +53,34 @@ module.exports = {
     return new Promise((resolve, reject) => {
       if (image === undefined) {
         connection.query(`UPDATE account SET name = '${name}', email = '${email}', id_role = '${id_role}' WHERE account.id = $1`, [id])
-        connection.query('SELECT account.*, role.name AS role FROM account INNER JOIN role ON role.id = account.id_role', (error, result) => {
-          if (error) reject(new Error(error))
-          resolve(result)
-        })
+        setTimeout(() => {
+          connection.query('SELECT account.*, role.name AS role FROM account INNER JOIN role ON role.id = account.id_role', (error, result) => {
+            if (error) reject(new Error(error))
+            return resolve(result)
+          })
+        }, 1000)
       } else {
         connection.query(`UPDATE account SET name = '${name}', email = '${email}', id_role = '${id_role}', image = '${image}' WHERE account.id = $1`, [id])
-        connection.query('SELECT account.*, role.name AS role FROM account INNER JOIN role ON role.id = account.id_role', (error, result) => {
-          if (error) reject(new Error(error))
-          resolve(result)
-        })
+        setTimeout(() => {
+          connection.query('SELECT account.*, role.name AS role FROM account INNER JOIN role ON role.id = account.id_role', (error, result) => {
+            if (error) reject(new Error(error))
+            return resolve(result)
+          })
+        }, 1000)
       }
     })
   },
   deleteAccount: (id) => {
     return new Promise((resolve, reject) => {
       connection.query('DELETE FROM account WHERE account.id = $1', [id])
-      connection.query('SELECT account.*, role.name AS role FROM account INNER JOIN role ON role.id = account.id_role', (error, result) => {
-        if (error) reject(new Error(error))
-        connection.query('ALTER SEQUENCE account_id_seq RESTART')
-        connection.query('UPDATE account SET id = DEFAULT')
-        resolve(result)
-      })
+      setTimeout(() => {
+        connection.query('SELECT account.*, role.name AS role FROM account INNER JOIN role ON role.id = account.id_role', (error, result) => {
+          if (error) reject(new Error(error))
+          connection.query('ALTER SEQUENCE account_id_seq RESTART')
+          connection.query('UPDATE account SET id = DEFAULT')
+          return resolve(result)
+        })
+      }, 1000)
     })
   },
   checkId: (id) => {
